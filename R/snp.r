@@ -58,9 +58,6 @@ SNP <- function(x, y) {
   if (any(is.na(x)) || any(is.na(y))) {
     stop("x and y cannot contain NA values")
   }
-  if (num_h_points <= 0) {
-    stop("num_h_points must be positive")
-  }
 
   num_h_points <- 40
   num_slices <- 60
