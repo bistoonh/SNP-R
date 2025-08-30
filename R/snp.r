@@ -47,7 +47,7 @@
 #' lines(x, result$y_k_opt, col="red", lwd=2)
 #'
 #' @export
-SNP <- function(x, y, num_h_points = 50) {
+SNP <- function(x, y) {
   start_time <- proc.time()   # Record start time of function execution
   n <- length(x)
   
@@ -61,8 +61,9 @@ SNP <- function(x, y, num_h_points = 50) {
   if (num_h_points <= 0) {
     stop("num_h_points must be positive")
   }
-  
-  num_slices <- 30
+
+  num_h_points <- 40
+  num_slices <- 60
   k_max <- 10
   
   # Initial bandwidth range based on Silverman's rule of thumb
