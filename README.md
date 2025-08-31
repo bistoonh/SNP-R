@@ -23,7 +23,7 @@ library(SNP)
 
 # Generate sample data
 set.seed(123)
-n <- 1500
+n <- 2500
 x <- sort(runif(n, 0, 1))
 y <- sin(2*pi*x) + rnorm(n, 0, 0.1)
 
