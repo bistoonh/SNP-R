@@ -76,10 +76,8 @@ For datasets with n > 10000, SNP typically shows:
 
 ## Citation
 
-If you use this package in your research, please cite:
-
 ```
-Your paper citation here (to be added after publication)
+..........
 ```
 
 ## Contributing
