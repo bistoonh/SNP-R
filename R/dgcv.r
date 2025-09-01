@@ -96,6 +96,8 @@ DGCV <- function(x, y, num_h_points = 50) {
   cat("\n--- Original GCV Smoothing Summary ---\n")
   cat("h_opt_gcv:", h_opt_gcv, "\n")
   cat("time_elapsed:", elapsed["elapsed"], "\n")
+  cat("\n")
+  cat("-------------End SNP-------------\n")
   
   gc()  # Trigger garbage collection
   

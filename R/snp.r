@@ -1,13 +1,12 @@
 #' Stepwise Noise Peeling for Nadaraya-Watson Regression
 #'
-#' Implements the Stepwise Noise Peeling (SNP) algorithm for efficient bandwidth
-#' selection in Nadaraya-Watson regression with Gaussian kernels. SNP provides
-#' a scalable alternative to Direct Generalized Cross-Validation (DGCV).
+#' Implements the Stepwise Noise Peeling (SNP) algorithm that bypasses 
+#' bandwidth selection in Nadaraya-Watson regression by using iterative 
+#' smoothing. SNP provides a scalable alternative to Direct Generalized 
+#' Cross-Validation (DGCV) by avoiding continuous bandwidth optimization.
 #'
 #' @param x Numeric vector of predictor values (sorted).
 #' @param y Numeric vector of response values corresponding to x.
-#' @param num_h_points Integer, number of bandwidth candidates to evaluate 
-#'   in Phase I (default: 50).
 #'
 #' @return A list containing:
 #' \describe{
@@ -51,6 +50,10 @@ SNP <- function(x, y) {
   start_time <- proc.time()   # Record start time of function execution
   n <- length(x)
   
+  num_h_points = 40
+  num_slices <- 60
+  k_max <- 10
+  
   # Input validation
   if (length(x) != length(y)) {
     stop("x and y must have the same length")
@@ -58,10 +61,10 @@ SNP <- function(x, y) {
   if (any(is.na(x)) || any(is.na(y))) {
     stop("x and y cannot contain NA values")
   }
+  if (num_h_points <= 0) {
+    stop("num_h_points must be positive")
+  }
 
-  num_h_points <- 40
-  num_slices <- 60
-  k_max <- 10
   
   # Initial bandwidth range based on Silverman's rule of thumb
   h_s <- 1.06 * stats::sd(x) * n^(-1/5)
@@ -173,6 +176,8 @@ SNP <- function(x, y) {
   cat("k_opt (final):", k_opt, "\n")
   cat("k_max:", k_max, "\n")
   cat("time_elapsed:", elapsed["elapsed"], "\n")
+  cat("\n")
+  cat("-------------End SNP-------------\n")
   
   gc()  # Trigger garbage collection
   

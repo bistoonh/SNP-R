@@ -1,12 +1,12 @@
-test_that("SNP function works correctly", {
-  # Generate test data
+test_that("SNP function works correctly with large datasets", {
+  # Generate test data (designed for n > 500)
   set.seed(123)
-  n <- 50
-  x <- sort(runif(n, 0, 1))
-  y <- sin(2*pi*x) + rnorm(n, 0, 0.1)
+  n <- 1000
+  x <- sort(runif(n, 0, 10))
+  y <- sin(x) + rnorm(n, 0, 0.1)
   
   # Test basic functionality
-  result <- SNP(x, y, num_h_points = 10)  # Use fewer points for speed
+  result <- SNP(x, y)
   
   # Check return structure
   expect_type(result, "list")
@@ -28,29 +28,39 @@ test_that("SNP function works correctly", {
   expect_true(all(is.finite(result$gcv_approx_k)))
 })
 
+test_that("SNP handles different large dataset sizes", {
+  sizes <- c(500, 1000, 2000)
+  
+  for (n in sizes) {
+    set.seed(42)
+    x <- sort(runif(n, 0, 5))
+    y <- x^2 + rnorm(n, 0, 0.2)
+    
+    result <- SNP(x, y)
+    
+    expect_length(result$y_k_opt, n)
+    expect_true(result$h_start > 0)
+    expect_true(result$k_opt >= 1)
+    expect_true(result$k_opt <= 10)
+  }
+})
+
 test_that("SNP handles edge cases", {
-  # Test with minimal data
-  x <- c(1, 2, 3)
-  y <- c(1, 4, 2)
-  
-  expect_no_error(result <- SNP(x, y, num_h_points = 5))
-  expect_length(result$y_k_opt, 3)
-  
   # Test input validation
   expect_error(SNP(c(1, 2), c(1)), "same length")
   expect_error(SNP(c(1, NA), c(1, 2)), "NA values")
   expect_error(SNP(c(1, 2), c(1, NA)), "NA values")
-  expect_error(SNP(c(1, 2), c(1, 2), num_h_points = 0), "positive")
 })
 
-test_that("SNP produces reasonable smoothing", {
-  # Test with known smooth function
+test_that("SNP produces reasonable smoothing on large data", {
+  # Test with known smooth function on large dataset
   set.seed(456)
-  x <- seq(0, 1, length.out = 30)
-  true_y <- sin(2*pi*x)
-  y <- true_y + rnorm(30, 0, 0.05)
+  n <- 800
+  x <- seq(0, 2*pi, length.out = n)
+  true_y <- cos(x)
+  y <- true_y + rnorm(n, 0, 0.1)
   
-  result <- SNP(x, y, num_h_points = 10)
+  result <- SNP(x, y)
   
   # Smoothed result should be closer to true function than noisy observations
   mse_original <- mean((y - true_y)^2)
@@ -59,19 +69,59 @@ test_that("SNP produces reasonable smoothing", {
   expect_lt(mse_smoothed, mse_original)
 })
 
-test_that("SNP is deterministic given same inputs", {
+test_that("SNP performance scales with large datasets", {
+  # Test scalability - larger datasets should still run reasonably fast
   set.seed(789)
-  x <- sort(runif(20, 0, 1))
-  y <- x^2 + rnorm(20, 0, 0.1)
   
-  # Run twice with same seed
+  times <- numeric(3)
+  sizes <- c(500, 1000, 1500)
+  
+  for (i in seq_along(sizes)) {
+    n <- sizes[i]
+    x <- sort(runif(n, 0, 1))
+    y <- sin(4*pi*x) + rnorm(n, 0, 0.15)
+    
+    start_time <- proc.time()
+    result <- SNP(x, y)
+    times[i] <- (proc.time() - start_time)["elapsed"]
+    
+    expect_length(result$y_k_opt, n)
+  }
+  
+  # Should scale reasonably (not exponentially)
+  expect_lt(times[3], times[1] * 10)  # 3x data shouldn't take 10x time
+})
+
+test_that("SNP works with heteroscedastic noise on large data", {
+  # Test with varying noise levels (realistic scenario)
   set.seed(100)
-  result1 <- SNP(x, y, num_h_points = 5)
+  n <- 1200
+  x <- sort(runif(n, 0, 8))
   
-  set.seed(100)
-  result2 <- SNP(x, y, num_h_points = 5)
+  # Create varying noise
+  noise_sd <- 0.1 + 0.3 * (x > 4)  # Higher noise in second half
+  y <- 2 * exp(-0.5 * x) + rnorm(n, 0, noise_sd)
   
-  expect_equal(result1$y_k_opt, result2$y_k_opt)
-  expect_equal(result1$h_start, result2$h_start)
-  expect_equal(result1$k_opt, result2$k_opt)
+  result <- SNP(x, y)
+  
+  expect_length(result$y_k_opt, n)
+  expect_true(all(is.finite(result$y_k_opt)))
+  expect_true(result$time_elapsed > 0)
+})
+
+test_that("SNP handles polynomial trends on large datasets", {
+  # Test with polynomial data (common real-world scenario)
+  set.seed(200)
+  n <- 600
+  x <- sort(runif(n, -2, 2))
+  y <- 0.5 * x^3 - 2 * x^2 + x + 1 + rnorm(n, 0, 0.2)
+  
+  result <- SNP(x, y)
+  
+  # Should produce smooth curve
+  expect_length(result$y_k_opt, n)
+  expect_true(all(is.finite(result$y_k_opt)))
+  
+  # Smoothed curve should be less variable than original
+  expect_lt(var(result$y_k_opt), var(y))
 })

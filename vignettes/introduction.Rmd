@@ -1,8 +1,7 @@
 # SNP: Stepwise Noise Peeling for Nadaraya-Watson Regression
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/yourusername/SNP/workflows/R-CMD-check/badge.svg)](https://github.com/yourusername/SNP/actions)
-[![CRAN status](https://www.r-pkg.org/badges/version/SNP)](https://CRAN.R-project.org/package=SNP)
+[![R-CMD-check](https://github.com/yourusername/SNP/workflows/R-CMD-check/badge.svg)](https://github.com/bistoonh/SNP/actions)
 <!-- badges: end -->
 
 The **SNP** package implements the Stepwise Noise Peeling algorithm for efficient bandwidth selection in Nadaraya-Watson regression with Gaussian kernels. SNP provides a scalable alternative to Direct Generalized Cross-Validation (DGCV) by converting continuous bandwidth optimization into discrete iteration selection, dramatically reducing computational cost while maintaining statistical equivalence.
@@ -13,7 +12,7 @@ You can install the development version of SNP from GitHub with:
 
 ```r
 # install.packages("devtools")
-devtools::install_github("yourusername/SNP")
+devtools::install_github("bistoonh/SNP")
 ```
 
 ## Quick Start
@@ -23,7 +22,7 @@ library(SNP)
 
 # Generate sample data
 set.seed(123)
-n <- 100
+n <- 1500
 x <- sort(runif(n, 0, 1))
 y <- sin(2*pi*x) + rnorm(n, 0, 0.1)
 
@@ -70,8 +69,8 @@ This reformulation preserves the adaptivity of GCV while converting costly conti
 ## Performance
 
 For datasets with n > 1000, SNP typically shows:
-- **Speed**: 10-100x faster than DGCV
-- **Accuracy**: < 1% difference in MSE compared to DGCV
+- **Speed**: Orders of magnitude faster than DGCV
+- **Accuracy**: < 1% difference in RMSE compared to DGCV
 - **Memory**: More efficient memory usage due to iterative approach
 
 ## Citation
@@ -79,12 +78,12 @@ For datasets with n > 1000, SNP typically shows:
 If you use this package in your research, please cite:
 
 ```
-Your paper citation here (to be added after publication)
+
 ```
 
 ## Contributing
 
-Contributions are welcome! Please see our [contributing guidelines](CONTRIBUTING.md) for details.
+
 
 ## License
 
@@ -92,4 +91,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Issues
 
-Found a bug? Have a feature request? Please [open an issue](https://github.com/yourusername/SNP/issues) on GitHub.
+Found a bug? Have a feature request? Please [open an issue](https://github.com/bistoonh/SNP/issues) on GitHub.

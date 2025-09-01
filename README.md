@@ -23,7 +23,7 @@ library(SNP)
 
 # Generate sample data
 set.seed(123)
-n <- 2500
+n <- 2000
 x <- sort(runif(n, 0, 1))
 y <- sin(2*pi*x) + rnorm(n, 0, 0.1)
 
@@ -69,20 +69,22 @@ This reformulation preserves the adaptivity of GCV while converting costly conti
 
 ## Performance
 
-For datasets with n > 10000, SNP typically shows:
-- **Speed**: 5-50x faster than DGCV
+For datasets with n > 1000, SNP typically shows:
+- **Speed**: Orders of magnitude faster than DGCV
 - **Accuracy**: < 1% difference in MSE compared to DGCV
 - **Memory**: More efficient memory usage due to iterative approach
 
 ## Citation
 
+If you use this package in your research, please cite:
+
 ```
-..........
+
 ```
 
 ## Contributing
 
-Contributions are welcome! Please see our [contributing guidelines](CONTRIBUTING.md) for details.
+
 
 ## License
 

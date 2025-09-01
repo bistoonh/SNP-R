@@ -3,11 +3,10 @@ Type: Package
 Title: Stepwise Noise Peeling for Nadaraya-Watson Regression
 Version: 0.1.0
 Authors@R: 
-    person("First", "Last", , "email@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Implements the Stepwise Noise Peeling (SNP) algorithm for 
-    efficient bandwidth selection in Nadaraya-Watson regression with Gaussian 
-    kernels. SNP provides a scalable alternative to Direct Generalized 
+    person("Bistoon", "Hosseini", , "bistoon.hosseini@gmail.com", role = c("aut", "cre"))
+Description: Implements the Stepwise Noise Peeling (SNP) algorithm that bypasses 
+	bandwidth selection in Nadaraya-Watson regression by using iterative 
+	smoothing. SNP provides a scalable alternative to Direct Generalized 
     Cross-Validation (DGCV) by converting continuous bandwidth optimization 
     into discrete iteration selection, dramatically reducing computational 
     cost while maintaining statistical equivalence.
@@ -26,5 +25,5 @@ Suggests:
     rmarkdown,
     ggplot2
 VignetteBuilder: knitr
-URL: https://github.com/yourusername/SNP
-BugReports: https://github.com/yourusername/SNP/issues
+URL: https://github.com/bistoonh/SNP
+BugReports: https://github.com/bistoonh/SNP/issues

@@ -54,7 +54,7 @@ example_stepwise <- function() {
   snp_result <- suppressMessages(SNP(x, y))
   
   # Apply DGCV (suppress verbose output)
-  dgcv_result <- suppressMessages(DGCV(x, y, num_h_points = 30))
+  dgcv_result <- suppressMessages(DGCV(x, y, num_h_points = 50))
   
   # Calculate RMSE against true function
   rmse_snp <- sqrt(mean((snp_result$y_k_opt - y_true)^2))
@@ -154,7 +154,7 @@ example_wavy <- function() {
   snp_result <- suppressMessages(SNP(x, y))
   
   # Apply DGCV (suppress verbose output)
-  dgcv_result <- suppressMessages(DGCV(x, y, num_h_points = 25))
+  dgcv_result <- suppressMessages(DGCV(x, y, num_h_points = 50))
   
   # Calculate RMSE against true function
   rmse_snp <- sqrt(mean((snp_result$y_k_opt - y_true)^2))
