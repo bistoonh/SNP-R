@@ -73,6 +73,7 @@ SNP <- function(x, y) {
   # Upper bound for bandwidth: standard Silverman bandwidth
   h_max <- 1 * h_s
   
+  cat("-------------Start SNP-------------\n")
   cat(sprintf("h_candidates: [%.4f , %.4f]\n", h_min, h_max))
   
   # Determine slice size based on sample size
@@ -113,7 +114,7 @@ SNP <- function(x, y) {
   # Use median of h_opt estimates as starting point
   h_start <- 0.5 * stats::median(h_opts)
   
-  cat("-------------Start SNP-------------\n")
+  
   cat("h_start:", h_start, "\n")
   cat("summary h_opts:", summary(h_opts), "\n")
   
