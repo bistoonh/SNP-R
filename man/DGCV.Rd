@@ -25,7 +25,7 @@ in Nadaraya-Watson regression. This is the reference method that SNP approximate
 \examples{
 # Generate sample data
 set.seed(123)
-n <- 100
+n <- 1000
 x <- sort(runif(n, 0, 1))
 y <- sin(2*pi*x) + rnorm(n, 0, 0.1)
 

@@ -13,7 +13,7 @@ You can install the development version of SNP from GitHub with:
 
 ```r
 # install.packages("devtools")
-devtools::install_github("bistoonh/SNP-R", force = TRUE)
+devtools::install_github("bistoonh/SNP-R", forec = TRUE)
 ```
 
 ## Quick Start
