@@ -2,12 +2,11 @@
 \alias{SNP}
 \title{Stepwise Noise Peeling for Nadaraya-Watson Regression}
 \usage{
-SNP(x, y, num_h_points = 50)
+SNP(x, y)
 }
 \arguments{
 \item{x}{Numeric vector of predictor values (sorted).}
 \item{y}{Numeric vector of response values corresponding to x.}
-\item{num_h_points}{Integer, number of bandwidth candidates to evaluate in Phase I (default: 50).}
 }
 \value{
 A list containing:
