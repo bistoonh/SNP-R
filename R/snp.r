@@ -113,6 +113,7 @@ SNP <- function(x, y) {
   # Use median of h_opt estimates as starting point
   h_start <- 0.5 * stats::median(h_opts)
   
+  cat("-------------Start SNP-------------\n")
   cat("h_start:", h_start, "\n")
   cat("summary h_opts:", summary(h_opts), "\n")
   
