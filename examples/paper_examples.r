@@ -253,7 +253,7 @@ example_california_housing <- function() {
     snp_result <- suppressMessages(SNP(x, y))
     
     # Apply DGCV (suppress verbose output)
-    dgcv_result <- suppressMessages(DGCV(x, y, num_h_points = 30))
+    dgcv_result <- suppressMessages(DGCV(x, y, num_h_points = 50))
     
     # Calculate RMSE (no true function, so use cross-method comparison)
     rmse_diff <- sqrt(mean((snp_result$y_k_opt - dgcv_result$y_h_opt)^2))
