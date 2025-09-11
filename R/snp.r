@@ -82,10 +82,9 @@ SNP <- function(x, y) {
   if (n < min_slice) {
     slice_size <- n
   } else {
-    #slice_size <- floor(max(min_slice, sqrt(n * log(n))))
-    #slice_size <- floor(sqrt(n * log(n)))
+    slice_size <- floor(max(min_slice, sqrt(n * log(n))))
   }
-  slice_size <- floor(sqrt(n * log(n)))
+
   # Randomly select starting indices for each slice
   start_indices <- sample(1:(n - slice_size + 1), num_slices, replace = TRUE)
   slice_indices <- lapply(start_indices, function(start_idx) start_idx:(start_idx + slice_size - 1))
