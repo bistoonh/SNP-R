@@ -50,7 +50,7 @@ SNP <- function(x, y) {
   start_time <- proc.time()   # Record start time of function execution
   n <- length(x)
   
-  num_h_points = 25
+  num_h_points <- 25
   num_slices <- 60
   k_max <- 10
   
