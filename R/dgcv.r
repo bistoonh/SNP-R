@@ -72,7 +72,7 @@ DGCV <- function(x, y, num_h_points = 50) {
   h_max <- 1 * h_s
   h_candidates <- seq(h_min, h_max, length.out = num_h_points)
   
-  cat("-------------Start DGCV-------------\n")
+  cat("-------------Start (DGCV)-------------\n")
   cat(sprintf("h_candidates: [%.4f , %.4f]\n", min(h_candidates), max(h_candidates)))
   
   # Initialize containers for results
@@ -98,7 +98,7 @@ DGCV <- function(x, y, num_h_points = 50) {
   cat("h_opt_gcv:", h_opt_gcv, "\n")
   cat("time_elapsed:", elapsed["elapsed"], "\n")
   cat("\n")
-  cat("-------------End SNP-------------\n")
+  cat("-------------End (DGCV)-------------\n")
   
   gc()  # Trigger garbage collection
   

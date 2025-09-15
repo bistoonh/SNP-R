@@ -7,6 +7,10 @@
 #'
 #' @param x Numeric vector of predictor values (sorted).
 #' @param y Numeric vector of response values corresponding to x.
+#' @param num_h_points Integer, number of bandwidth candidates to evaluate
+#'   within each slice (default: 40).
+#' @param num_slices Integer, number of random slices to use for initial
+#'   bandwidth estimation (default: 60).
 #'
 #' @return A list containing:
 #' \describe{
@@ -40,18 +44,19 @@
 #' x <- sort(runif(n, 0, 1))
 #' y <- sin(2*pi*x) + rnorm(n, 0, 0.1)
 #'
-#' # Apply SNP smoothing
+#' # Apply SNP smoothing with default parameters
 #' result <- SNP(x, y)
 #' plot(x, y, pch=16, col="gray")
 #' lines(x, result$y_k_opt, col="red", lwd=2)
 #'
+#' # Apply SNP with custom parameters
+#' result_custom <- SNP(x, y, num_h_points = 30, num_slices = 40)
+#'
 #' @export
-SNP <- function(x, y) {
+SNP <- function(x, y, num_h_points = 40, num_slices = 60) {
   start_time <- proc.time()   # Record start time of function execution
   n <- length(x)
-
-  num_h_points = 40
-  num_slices = 60
+  
   k_max <- 10
   
   # Input validation
@@ -64,6 +69,10 @@ SNP <- function(x, y) {
   if (num_h_points <= 0) {
     stop("num_h_points must be positive")
   }
+  if (num_slices <= 0) {
+    stop("num_slices must be positive")
+  }
+
   
   # Initial bandwidth range based on Silverman's rule of thumb
   h_s <- 1.06 * stats::sd(x) * n^(-1/5)
@@ -72,17 +81,18 @@ SNP <- function(x, y) {
   # Upper bound for bandwidth: standard Silverman bandwidth
   h_max <- 1 * h_s
   
-  cat("-------------Start SNP-------------\n")
+  cat("-------------Start (SNP)-------------\n")
   cat(sprintf("h_candidates: [%.4f , %.4f]\n", h_min, h_max))
   
   # Determine slice size based on sample size
   min_slice <- 50
+  
   if (n < min_slice) {
     slice_size <- n
   } else {
     slice_size <- floor(max(min_slice, sqrt(n * log(n))))
   }
-
+  
   # Randomly select starting indices for each slice
   start_indices <- sample(1:(n - slice_size + 1), num_slices, replace = TRUE)
   slice_indices <- lapply(start_indices, function(start_idx) start_idx:(start_idx + slice_size - 1))
@@ -177,7 +187,7 @@ SNP <- function(x, y) {
   cat("k_max:", k_max, "\n")
   cat("time_elapsed:", elapsed["elapsed"], "\n")
   cat("\n")
-  cat("-------------End SNP-------------\n")
+  cat("-------------End (SNP)-------------\n")
   
   gc()  # Trigger garbage collection
   
