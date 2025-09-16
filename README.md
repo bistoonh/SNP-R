@@ -35,8 +35,8 @@ dgcv_result <- DGCV(x, y)
 
 # Plot results
 plot(x, y, pch=16, col="gray", main="SNP vs DGCV Comparison")
-lines(x, snp_result$y_k_opt, col="red", lwd=2, label="SNP")
-lines(x, dgcv_result$y_h_opt, col="blue", lwd=2, label="DGCV")
+lines(x, snp_result$y_k_opt, col="red", lwd=2)
+lines(x, dgcv_result$y_h_opt, col="blue", lwd=2)
 legend("topright", c("SNP", "DGCV"), col=c("red", "blue"), lwd=2)
 
 # Performance comparison
