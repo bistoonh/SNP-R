@@ -43,7 +43,7 @@ generate_mixture_data <- function(n, noise_sd = 0.5) {
 #' @return list
 #'
 #' @export
-mixture <- function(
+mixture_experiment <- function(
     n = 5000,
     noise_sd = 0.5,
     seed = 111,

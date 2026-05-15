@@ -98,32 +98,31 @@ mape_snp <- mape_shift(Y_true, result_snp$y_k_opt)
 mape_gcv <- mape_shift(Y_true, result_gcv$y_train_opt)
 
 cat(sprintf("SNP: Elapsed Time: %.1f(Sec), RMSE: %.3f, MAPE: %.2f\n", 
-result_snp$time_elapsed, rmse_snp, mape_snp))
+            result_snp$time_elapsed, rmse_snp, mape_snp))
 cat(sprintf("GCV: Elapsed Time: %.1f(Sec), RMSE: %.3f, MAPE: %.2f\n", 
-result_gcv$time_elapsed, rmse_gcv, mape_gcv))
+            result_gcv$time_elapsed, rmse_gcv, mape_gcv))
 
 # Plot results
 par(mfrow = c(1, 2))
 
-plt.subplot(1, 2, 1)
-plot(X, Y, pch = 16, cex = 0.5, col = rgb(0.7, 0.7, 0.7, 0.3), 
-xlab = "X", ylab = "y", 
-main = sprintf("SNP: RMSE=%.3f, MAPE=%.2f", rmse_snp, mape_snp))
+plot(X, Y, pch = 16, cex = 0.5, col = 'gray', 
+     xlab = "X", ylab = "y", 
+     main = sprintf("SNP: RMSE=%.3f, MAPE=%.2f", rmse_snp, mape_snp))
 lines(X, Y_true, col = "black", lwd = 2)
 lines(X, result_snp$y_k_opt, col = "red", lwd = 2)
 legend("topright", c("True function", "Training data", "SNP"), 
-col = c("black", "lightgray", "red"), lty = c(1, NA, 1), 
-pch = c(NA, 16, NA), lwd = c(2, NA, 2))
+       col = c("black", "gray", "red"), lty = c(1, NA, 1), 
+       pch = c(NA, 16, NA), lwd = c(2, NA, 2))
 grid()
 
-plot(X, Y, pch = 16, cex = 0.5, col = rgb(0.7, 0.7, 0.7, 0.3), 
-xlab = "X", ylab = "y", 
-main = sprintf("Direct GCV: RMSE=%.3f, MAPE=%.2f", rmse_gcv, mape_gcv))
+plot(X, Y, pch = 16, cex = 0.5, col = 'gray', 
+     xlab = "X", ylab = "y", 
+     main = sprintf("Direct GCV: RMSE=%.3f, MAPE=%.2f", rmse_gcv, mape_gcv))
 lines(X, Y_true, col = "black", lwd = 2)
 lines(X, result_gcv$y_train_opt, col = "green", lwd = 2)
 legend("topright", c("True function", "Training data", "GCV"), 
-col = c("black", "lightgray", "green"), lty = c(1, NA, 1), 
-pch = c(NA, 16, NA), lwd = c(2, NA, 2))
+       col = c("black", "gray", "green"), lty = c(1, NA, 1), 
+       pch = c(NA, 16, NA), lwd = c(2, NA, 2))
 grid()
 
 par(mfrow = c(1, 1))
@@ -138,13 +137,12 @@ The package includes reproducible experiments from the paper. These functions ru
 library(snpreg)
 
 res <- runtime(n_list = c(500), dims = c(1, 2, 3))
-res$means
-```
+res$mean_results```
 ### Run mixture experiment (synthetic data)
 ```r
 library(snpreg)
 
-mixture()
+mixture_experiment()
 ```
 ### Run 1D real data experiment
 ```r
