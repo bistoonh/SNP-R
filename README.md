@@ -136,7 +136,7 @@ The package includes reproducible experiments from the paper. These functions ru
 ```r
 library(snpreg)
 
-res <- runtime(n_list = c(500), dims = c(1, 2, 3))
+res <- runtime_benchmark(n_list = c(500), dims = c(1, 2, 3))
 res$mean_results
 ```
 ### Run mixture experiment (synthetic data)

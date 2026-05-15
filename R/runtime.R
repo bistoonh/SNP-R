@@ -126,7 +126,7 @@ generate_runtime_data <- function(
 #' @return list
 #'
 #' @export
-runtime <- function(
+runtime_benchmark <- function(
     n_list = c(
       500,
       1500,
