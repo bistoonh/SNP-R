@@ -36,7 +36,7 @@ Currently, install directly from GitHub:
 if (!require("devtools")) install.packages("devtools")
 
 # Install snpreg
-devtools::install_github("bistoonh/SNP-R")
+devtools::install_github("bistoonh/SNP-R", force = TRUE)
 ```
 ### Requirements
 
