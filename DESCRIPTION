@@ -1,6 +1,6 @@
-Package: snpregR
+Package: snpreg
 Type: Package
-Title: Stepwise Noise Peeling for Nadaraya-Watson Regression
+Title: Stepwise Noise Peeling for Nonparametric Regression
 Version: 0.1.0
 Authors@R: 
     person(
