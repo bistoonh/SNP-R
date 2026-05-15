@@ -1,0 +1,30 @@
+Package: snpregR
+Type: Package
+Title: Stepwise Noise Peeling for Nadaraya-Watson Regression
+Version: 0.1.0
+Authors@R: 
+    person(
+      given = "Bistoon",
+      family = "Hosseini",
+      role = c("aut", "cre"),
+      email = "bistoon.hosseini@gmail.com"
+    )
+Description: 
+    Implements the Stepwise Noise Peeling (SNP) algorithm for 
+    Nadaraya-Watson nonparametric regression. The package provides 
+    bandwidth selection using the SNP procedure as well as the 
+    direct Generalized Cross-Validation (DGCV) method. Utilities 
+    for evaluating prediction accuracy and reproducing numerical 
+    experiments from the accompanying paper are included.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports:
+    stats,
+    graphics
+Suggests:
+    testthat (>= 3.0.0),
+    devtools
+Config/testthat/edition: 3

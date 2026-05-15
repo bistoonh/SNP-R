@@ -1,0 +1,17 @@
+export(construct_W)
+export(nw_direct_gcv)
+export(nw_snp)
+export(rmse)
+export(mape_shift)
+export(mixture)
+export(runtime)
+export(realdata_1d)
+export(realdata_2d)
+
+importFrom(stats, runif)
+importFrom(stats, rnorm)
+importFrom(stats, optim)
+
+importFrom(graphics, persp)
+importFrom(graphics, points)
+importFrom(graphics, par)
